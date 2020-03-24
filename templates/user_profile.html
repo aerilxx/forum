@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block content %}
+   
+{% if user.is_authenticated %}
+
+ <div class="container">
+    <section class="generic text-center">
+       <h2>My posts</h2>
+      <hr class="hr-mid">
+        <img src="{% static 'img/duck.jpg' %}">
+
+    <div class="row why-div">         
+           <hr class="hr-mid">
+           <div class="sub-text text-center">
+                 <p class="font-1">
+                    Sorry, you cannot delete any posts. But you can always view your past posts.
+                 </p>
+                 <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" ">
+                  <a class="btn btn-default call-btn-1" href="{% url 'post_in_profile' %}">POST</a>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" ">
+                  <a class="btn btn-default call-btn-1" style= "margin-left: auto;" href="{% url 'logout' %}">LogOut</a>
+                </div>
+
+                <div class="col-lg-3 col-md-3 col-sm-3 col-xs-12" ">
+                  <a class="btn btn-default call-btn-1" style= "margin-left: auto;" href="{% url 'delete_account' %}">Delete Me</a>
+                </div>
+
+           </div>
+    </div>
+
+    </section>
+ 
+     {% for post in posts %}
+      <div class="row" style="max-width: 600px;">
+          <div class="col-lg-9 col-sm-12 col-md-9 col-xs-12">
+           <div class="holder-para">
+            <h3>{{ post.subject }}</h3>
+            <hr class="hr-short">
+            <p class="font-2">
+                  {{ post.context }} 
+            </p>
+           </div>
+          </div>
+      </div>
+      <hr class="line-full">
+    {% endfor %}   
+{% endif %}   
+</div>
+
+{% endblock %}

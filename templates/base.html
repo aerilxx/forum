@@ -1,0 +1,69 @@
+{% load static %}
+
+
+<htnl>
+<head>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'font-awesome/css/font-awesome.min.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,600" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
+    <script type="text/javascript" src="{% static 'js/script.js' %}" ></script>
+    <title>WOW - Home</title>
+</head>
+
+<body>
+	<div class="overlay" id="overlay" onclick="closeNav()"></div>
+	
+        <div class="head-bar">
+            <div class="container">
+              <div class="row">
+                <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6">
+                    <a href="{% url 'index' %}"><img class="img-responsive" src="{% static 'img/logo.png' %}"></a>
+                </div>
+                <div class="col-lg-6 col-xs-6 col-sm-6 col-md-6 text-right">
+                    <div id="mySidenav" class="sidenav text-center">
+                        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a><br>
+                        <a href="{% url 'forum_index' %}">Forum</a><hr>
+                        <a href="{% url 'login' %}">Log In</a><hr>
+                        <a href="{% url 'signup' %}">Register</a>
+                        <a href="{% url 'my_profile' %}">My Posts</a>                 
+                    </div>
+                    <div class="main" id="main">
+                      <a href="#" onclick="openNav()">MENU &#9776;</a>
+                    </div>
+                </div>
+              </div>
+              <hr>
+          </div>
+          </div>
+
+    {% block content %}
+
+    {% endblock %}
+
+    <section class="footer">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+            <div class="footer-p1">
+                    <p class="font-2"></p>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-2 col-sm-2 col-xs-2">
+            <img class="img-responsive foot-img" src="{% static 'img/footer-logo.png' %}">
+          </div>
+          <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+            <div class="footer-p2" >
+                     <p class="font-2">Made with  <i class="fa fa-heart" aria-hidden="true" ></i> by <a href="#" target="_blank">PowerUpp</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+</body>
+</html>
+
+    

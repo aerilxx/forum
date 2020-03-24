@@ -1,0 +1,100 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block content %}
+
+<style type="text/css">
+	/* Site Heading */
+.site-heading h3{
+    font-size : 40px;
+    margin-bottom: 10px;
+    font-weight: 600;
+    text-align: center;
+}
+.border {
+    background: #e8e8e8 ;
+    height: 1px;
+    width: 40%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 45px;
+    float:left;
+}
+
+/* Feature-CSS */
+
+.icon {
+    color : #fff;
+    padding:15px;
+    background:#323232 ;
+    font-size:50px;
+    border-radius:90px;
+    border:10px solid #323232 ;
+    
+}
+.feature-box {
+    text-align: center;
+    padding: 20px;
+    transition: .5s;
+    margin-bottom: 30px;
+    border: 1px solid #e8e8e8;
+}
+.feature-box:hover {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.feature-box h4 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 25px 0 15px;
+}
+.text{
+	text-align: justify;
+    padding: 20px;
+    overflow: auto;
+    font-size: 1.3rem;
+    height:250px;
+}
+
+</style>
+
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<!------ Include the above in your HEAD tag ---------->
+
+
+             <br></br></br></br>
+
+<div class="Features-section paddingTB60 ">
+    <div class="container">
+    	<br>
+		<div class="row">
+			<div class="col-md-12 site-heading">
+				<div class="mx-auto" style="max-width: 100%;">
+				<h3>Forum Category</h3>
+				<p  class="text-break">This is a place where you can have a little whine and a moan. Tired of being Miss Perfect or Mr Good in life? It's okay, complain here and see if anybody joins you. If you want to keep track of all the emotional posts you've posted, maybe you should consider creating an account <a href = "{% url 'signup' %}"> here </a>. Or just post without an account, whatever you like. </p>	
+			    </div>
+
+			</div>
+		</div>
+		<hr>
+
+	<div class="row">
+		{% for cat in object_list %}
+		<div class="col-md-4">
+			<div class="col-md-12 feature-box">
+				<span class="glyphicon glyphicon-grain icon"></span>
+				<h4>{{ cat.name }}</h4>
+				<p class="text">{{ cat.descn }}</p>
+				<a class="btn btn-primary" href="{% url 'category' category_id=cat.id %}" role="button">VIEW ALL POSTS</a>
+
+			</div>
+		</div> <!-- End Col -->
+		{% endfor %}
+	
+	</div>
+</div>
+</div>
+
+{% endblock %}

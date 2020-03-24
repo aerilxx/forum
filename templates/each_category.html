@@ -1,0 +1,263 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load random_image %}
+{% block content %}
+
+<head>
+
+<link rel='stylesheet' href='//content.invisioncic.com/p289038/css_built_2/341e4a57816af3ba440d891ca87450ff_framework.css.9b437256cb398deb6946b0a2acc1ff68.css.gz?v=591afbace3' media='all'>
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!-- css for topic section -->
+
+<style>
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
+  background-color: white;
+  padding: 1px;
+}
+.grid-item {
+  background-color: white;
+  border: 0px solid rgba(0, 0, 0, 0.8);
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+}
+
+a.bubble {
+	position: relative;
+	width: 300px;
+	text-align: center;
+	line-height: 1.4em;
+	margin: 40px auto;
+	background-color: #fff;
+	border: 4px solid #333;
+	border-radius: 30px;
+	font-family: sans-serif;
+	padding: 20px;
+	font-size: large;
+}
+
+a.thought {
+	width: 160px;
+	border-radius: 40px;
+	padding: 10px;	
+}
+
+a.bubble:before,
+a.bubble:after {
+	content: ' ';
+	position: absolute;
+	width: 0;
+	height: 0;
+}
+
+a.thought:before,
+a.thought:after {
+	left: 10px;
+	bottom: -30px;
+	width: 40px;
+	height: 40px;
+	background-color: #fff;
+	border: 2px solid #333;
+	-webkit-border-radius: 18px;
+	-moz-border-radius: 18px;
+	border-radius: 18px;
+}
+
+a.thought:after {
+	width: 20px;
+	height: 20px;
+	left: 5px;
+	bottom: -40px;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+}
+</style>
+</head>
+
+<body>
+	<div class="container">
+		<br><br>
+		<div class="row">
+			<div class="col-md-12 site-heading">
+				<div class="mx-auto" style="width: 800px;">
+				<h3>{{ category }}</h3>
+				<p  class="text-break">{{ category.descn }} </p>	
+			</div>
+
+			<a class="btn btn-primary" href="{% url 'forum_index' %}" role="button" style="float: left;">Return to category</a>
+			
+			<a class="btn btn-primary" href="{% url 'post_in_category' category_id=category.id %}" role="button" style="float: right;">Post</a>
+			
+		</div>
+		<br><br><br>
+	</div>
+<hr>
+
+	<main id='ipsLayout_body' class='ipsLayout_container'>
+
+<!-- start of the topic tag -->
+
+    <div class="container">
+   
+    	<div class="grid-container">
+    	  {% for forum in forums %}
+    	  <br>
+		  <div class="grid-item" >
+			<a class="bubble thought" href="{% url 'forum' forum_slug=forum.slug %}">{{ forum.name }} </a>
+		  </div>
+		</br>
+		  {% endfor %}
+		</div>
+  
+		<!-- <div class="row" style="width: 800px;">
+			<ul class="nav justify-content-center">
+			{% for forum in forums %}
+			
+			  <li class="nav-item">
+			    <a class="nav-link active" href="{% url 'forum' forum_slug=forum.slug %}" style="text-transform: uppercase;">
+			    	<span class="glyphicon glyphicon-heart"></span>{{ forum.name }} 
+			    	<p> total post</p>
+			    	<p>{{ forum.post_set.count }}</p>
+			    </a>
+			    
+			  </li>
+
+			{% endfor %}
+		</ul>
+		</div> -->
+	</div>
+</br></br>
+	<!-- end of topic tag -->
+	
+{% if posts %}	
+<div data-controller='forums.front.forum.forumPage'>
+	<ul class="ipsToolList ipsToolList_horizontal ipsClearfix ipsSpacer_both"></ul>
+	
+	<div class='ipsBox' data-resort='listResort' data-tableID='topics'  data-controller='core.global.core.table'>
+	
+	<ol class='ipsDataList ipsDataList_zebra ipsClear cForumTopicTable  cTopicList ' data-role="tableRows">
+						
+		<!-- post info -->
+		{% for post in posts %}
+		<li class="ipsDataItem ipsDataItem_responsivePhoto">
+			
+			<div class='ipsDataItem_main'>
+				<h4 class='ipsDataItem_title ipsContained_container'>	
+					<span class='ipsType_break ipsContained'>
+						<a href="{% url 'post' post_id=post.id %}">
+							<span>
+								{{ post.subject }}
+							</span>
+						</a>
+					</span>
+				</h4>
+
+				<div class='ipsDataItem_meta ipsType_reset ipsType_light ipsType_blendLinks'>
+					{% if post.posted_by %}
+					<span>
+						By <a class="ipsType_break">{{ post.posted_by }}</a>, 
+					</span>
+				    {% else %}
+				    <span>
+						By <a class="ipsType_break">{{ post.posted_by_user }}</a>, 
+					</span>
+					{% endif %}
+					<time>
+					{{ post.created_on }}
+					</time>
+				</div>
+<!-- 
+			<div>TAG: {{ post.forum }}</div> -->
+			</div>
+
+			<!-- view and reply -->
+			<ul class='ipsDataItem_stats'>
+				
+				<li >
+					<span class='ipsDataItem_stats_number'>{{ post.num_replies }}</span>
+					<span class='ipsDataItem_stats_type'> replies</span>
+					
+				</li>			
+				<li class='ipsType_light'>
+					<span class='ipsDataItem_stats_number'>{{ post.num_views }}</span>
+					<span class='ipsDataItem_stats_type'> views</span>
+					
+				</li>
+
+			</ul>
+
+			<ul class='ipsDataItem_stats'>
+				<li>
+					<a class="ipsUserPhoto ipsUserPhoto_tiny" >
+						<img src="{{ MEDIA_URL }}{% random_image %}">						
+					</a>						
+				</li>
+			</ul>
+
+            <!-- last edit info  -->
+			<ul class='ipsDataItem_lastPoster ipsDataItem_withPhoto ipsType_blendLinks'>
+			
+				
+				<li>												
+					<a class="ipsType_break">Last updated at</a>				
+				</li>
+
+				<li class="ipsType_light">
+					<a ><time>{{ post.last_reply_on }}</time></a>
+				</li>
+			</ul>
+		
+		</li>	
+		{% endfor %}	
+	</ol>
+		
+
+	<div class="ipsButtonBar ipsPad_half ipsClearfix ipsClear">
+		<div data-role="tablePagination">
+
+			<ul class='ipsPagination' id='elPagination_05f0016f1da37fd54f21e39b920b5f43_1244793861' data-ipsPagination-seoPagination='true' data-pages='8' data-ipsPagination  data-ipsPagination-pages="8" data-ipsPagination-perPage='25'>
+		
+				{% if posts.has_previous %}
+				<li class='ipsPagination_next'><a href='?page={{ posts.previous_page_number }}' rel="next"  data-ipsTooltip title='Next page'>Prev</a></li>
+				{% endif %}
+
+			{% for page in posts.paginator.page_range %}
+				{% if posts.number == page %}
+				<!-- <li class='ipsPagination_page'><a href='?page={{ page }}'>{{ page }}</a></li> -->
+				{% endif %}
+			{% endfor %}
+
+				{% if posts.has_next %}
+				<li class='ipsPagination_next'><a href='?page={{ posts.next_page_number }}' rel="next"  data-ipsTooltip title='Next page'>Next</a></li>
+				{% endif %}
+						
+			</ul>
+
+        {% endif %}
+		</div>
+	</div>
+	</div>
+</div>
+
+	<div class='ipsResponsive_showPhone ipsResponsive_block ipsSpacer ipsSpacer_both'>
+	</div>
+</div>
+
+</div>
+
+	<div id='ipsLayout_sidebar' class='ipsLayout_sidebarright ' data-controller='core.front.widgets.sidebar'>
+	</div>
+
+</div>
+</div>
+			
+</main>
+
+</body>
+</html>
+
+{% endblock %}

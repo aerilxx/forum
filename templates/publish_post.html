@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<head>
+<link rel='stylesheet' href='//content.invisioncic.com/p289038/css_built_2/341e4a57816af3ba440d891ca87450ff_framework.css.9b437256cb398deb6946b0a2acc1ff68.css.gz?v=591afbace3' media='all'>
+
+<link rel='stylesheet' href='//content.invisioncic.com/p289038/css_built_2/258adbb6e4f3e83cd3b355f84e3fa002_custom.css.9e72647a811b7f343857b06bbf81c53b.css.gz?v=591afbace3' media='all'>
+
+</head>
+
+
+
+<div id="ipsLayout_mainArea">
+
+	<div class="ipsPageHeader ipsClearfix ipsSpacer_bottom">
+		<h1 class="ipsType_pageTitle">New Post</h1>
+	</div>
+
+	<form accept-charset="utf-8" class="ipsForm ipsForm_vertical" action="" method="post" enctype="multipart/form-data">
+		{% csrf_token %}
+	
+	<div class="ipsBox">
+		<h2 class="ipsType_sectionTitle ipsType_reset ipsHide">Topic Details</h2>
+		
+		<div class="ipsPad">
+				
+			<ul class="ipsForm ipsForm_vertical" maxlength="600">
+
+				{% for field in form %}
+				<span class="ipsFieldRow_desc">
+			        {{ field.errors }}
+			        {% if field.help_text %}
+			        <p class="help">{{ field.label_tag }}</p>
+			        <p>{{ field.help_text|safe }}</p>
+			        {% endif %}
+			    </span>
+				{% endfor %}
+					
+
+					<!-- subject -->
+			<li class="ipsFieldRow ipsClearfix ">
+	
+				<label class="ipsFieldRow_label" for="elInput_topic_title">
+					Title <span class="ipsFieldRow_required">Required</span>
+				</label>
+		
+				<div class="ipsFieldRow_content">
+
+					<!-- <input type="text" class="title" size='40'> -->
+                        {{ form.subject }}
+						<br>
+				</div>
+	
+			</li>
+				
+                        <!-- forum -->
+			<li class="ipsFieldRow ipsClearfix ">
+	
+				<label class="ipsFieldRow_label" for="elInput_topic_title">
+					Tag <span class="ipsFieldRow_required">Required</span>
+				</label>
+
+		
+				<div class="ipsFieldRow_content">
+
+					<!-- <input type="text" class="forum" size='40'> -->
+					{{ form.forum }}
+						<br>
+				</div>
+	
+			</li>		
+								<!-- contect -->
+			<li class="ipsFieldRow ipsClearfix ">
+				<label class="ipsFieldRow_label" for="elInput_topic_tags">
+					Context 
+					<span class="ipsFieldRow_required">Required</span>
+				</label>
+
+				<div class="ipsFieldRow_content">
+
+					<div class="ipsContained">
+					<!-- <textarea class="post_context" rows="20" cols="100" style="max-width: 100%; max-height: 100%;"></textarea> -->
+					{{ form.context }}
+				</div>	
+			</li>
+										
+		</ul>
+	</div>
+		
+	<div class="ipsAreaBackground ipsPad ipsType_center">
+		<a href="#" class="ipsButton ipsButton_link ipsButton ipsButton_medium">Cancel</a>
+		<input class="ipsButton ipsButton_primary" type="submit" value="Submit Topic" />
+		<!-- <button type="submit" class="ipsButton ipsButton_medium ipsButton_primary" role="button">Submit Topic</button> -->
+		
+	</div>
+
+	</div>	
+</form>
+</div>
+
+{% endblock %}

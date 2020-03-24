@@ -1,0 +1,266 @@
+{% extends 'base.html' %}
+
+{% load static %}
+{% load random_image %}
+
+{% block content %}
+<head>
+	<link rel='stylesheet' href='//content.invisioncic.com/p289038/css_built_2/341e4a57816af3ba440d891ca87450ff_framework.css.9b437256cb398deb6946b0a2acc1ff68.css.gz?v=591afbace3' media='all'>
+	<link rel='stylesheet' href='//content.invisioncic.com/p289038/css_built_2/05e81b71abe4f22d6eb8d1a929494829_responsive.css.ac35e83d85b8d2d8a7926652b11d0bd1.css.gz?v=591afbace3' media='all'>
+	<link rel='stylesheet' href='//content.invisioncic.com/p289038/css_built_2/90eb5adf50a8c640f633d47fd7eb1778_core.css.bad5fbedde6bddbe277857ae9c95d4d4.css.gz?v=591afbace3' media='all'>
+	<link rel='stylesheet' href='//content.invisioncic.com/p289038/css_built_2/62e269ced0fdab7e30e026f1d30ae516_forums.css.7446ac149d205e192e5a2d763ee48e85.css.gz?v=591afbace3' media='all'>
+	<link rel='stylesheet' href='//content.invisioncic.com/p289038/css_built_2/76e62c573090645fb99a15a363d8620e_forums_responsive.css.574a5512f66401f6e56998f32a0d0b23.css.gz?v=591afbace3' media='all'>
+	<link rel='stylesheet' href='//content.invisioncic.com/p289038/css_built_2/258adbb6e4f3e83cd3b355f84e3fa002_custom.css.9e72647a811b7f343857b06bbf81c53b.css.gz?v=591afbace3' media='all'>
+	
+</head>
+
+
+<body class='ipsApp ipsApp_front ipsJS_has ipsClearfix' data-pageApp='forums' data-pageLocation='front' data-pageModule='forums' data-pageController='topic'>
+	
+	<div style = "text-align: center;">
+		<a><img style = "height: 200px; width: 300px; " src ="{% static 'img/weekdays/' %}{{day}}.jpeg"></a>	
+	</div>
+
+<main id='ipsLayout_body' class='ipsLayout_container'>
+
+	<!-- header of user who post this article's avater -->
+	<div class="ipsPhotoPanel ipsPhotoPanel_small ipsPhotoPanel_notPhone ipsClearfix">
+		<a class="ipsUserPhoto ipsUserPhoto_small">
+            <img  src="{% static 'img/avater.jpeg' %}"> 
+		</a>
+
+		<div>
+			<h1 class="ipsType_pageTitle ipsContained_container">			
+				<span class="ipsType_break ipsContained">
+					<span>{{ post.subject }}</span>
+				</span>
+			</h1>
+			
+			<p class="ipsType_reset ipsType_blendLinks ipsSpacer_bottom ipsSpacer_half">
+				{% if post.posted_by %}
+				<span>
+					By <a class="ipsType_break">{{ post.posted_by }}</a>
+				</span>
+			    {% else %}
+			    <span>
+					By <a class="ipsType_break">{{ post.posted_by_user }}</a> 
+				</span>
+				{% endif %}
+				<br>
+			</p>
+		</div>
+	</div>
+	<div data-controller="core.front.core.commentFeed,forums.front.topic.view, core.front.core.ignoredComments" class="cTopic ipsClear ipsSpacer_top">
+	
+	<div id="elPostFeed" data-role="commentFeed" data-controller="core.front.core.moderation" >
+
+		<article  id='elComment_350126' class='cPost ipsBox  ipsComment  ipsComment_parent ipsClearfix ipsClear ipsColumns ipsColumns_noSpacing ipsColumns_collapsePhone   '>
+
+				<div class='cAuthorPane cAuthorPane_mobile ipsResponsive_showPhone ipsResponsive_block'>
+					<h3>
+						{% if post.posted_by %}
+						<span>
+							By <a class="ipsType_break">{{ post.posted_by }}</a> 
+						</span>
+					    {% else %}
+					    <span>
+							By <a class="ipsType_break">{{ post.posted_by_user }}</a> 
+						</span>
+						{% endif %}
+					</h3>
+                	
+                	<div class='cAuthorPane_photo'>
+			            <a style="max-width: 10%; max-height: 10%;"><img src="{% static 'img/avater.jpeg' %}"></a>
+				    </div>
+
+			</div>
+
+ <!-- information of the user  -->
+			<aside class='ipsComment_author cAuthorPane ipsColumn ipsColumn_medium ipsResponsive_hidePhone'>
+
+				<ul class='cAuthorPane_info ipsList_reset'>
+					<a class="ipsUserPhoto ipsUserPhoto_small">
+			            <img  src="{% static 'img/avater.jpeg' %}"> 
+					</a></br>
+
+					{% if post.posted_by %}
+					<span>
+						By <a class="ipsType_break">{{ post.posted_by }}</a> 
+					</span>
+				    {% else %}
+				    <span>
+						By <a class="ipsType_break">{{ post.posted_by_user }}</a> 
+					</span>
+					{% endif %}
+					
+				</ul>
+			</aside>
+
+			<div class='ipsColumn ipsColumn_fluid'>
+				<div class="ipsComment_content ipsType_medium  ipsFaded_withHover">
+
+					<div class="ipsComment_meta ipsType_light">
+						<div class="ipsPos_right ipsType_light ipsType_reset ipsFaded ipsFaded_more ipsType_blendLinks">
+							<ul class="ipsList_inline ipsComment_tools">
+						
+								<li><a class="ipsType_blendLinks" href="#" data-ipstooltip title="Share this post" data-role="shareComment"><i class="fa fa-share-alt"></i></a></li>
+				
+							</ul>
+						</div>
+
+						<div class="ipsType_reset">
+							<a class="ipsType_blendLinks">Posted <time>{{ post.created_on }}</time>
+							</a>
+							<span class="ipsResponsive_hidePhone"></span>
+						</div>
+
+					</div>
+
+<!-- context of the post -->
+					<div class="cPost_contentWrap ipsPad">
+				
+						<div data-role="commentContent" class="ipsType_normal ipsType_richText ipsContained" data-controller="core.front.core.lightboxedImages">
+							<p class="excert"  style="word-wrap: break-word">
+				              {{ post.context | linebreaksbr  }}
+				           </p>
+						</div>
+
+						<div class="ipsItemControls">
+							<div data-controller='core.front.core.reaction' class='ipsItemControls_right ipsClearfix '>	
+								<div class='ipsReact ipsPos_right'>
+									<div class='ipsReact_blurb ipsHide' data-role='reactionBlurb'>
+									</div>
+								</div>
+							</div>
+						</div>
+
+					</div>
+
+<!-- end of the post context -->
+
+				</div>
+			</div>
+
+		</article>
+					
+<!-- start of the comment -->
+
+{% if comments %}
+
+{% for comment in comments %}
+	<article  id='elComment_350126' class='cPost ipsBox  ipsComment  ipsComment_parent ipsClearfix ipsClear ipsColumns ipsColumns_noSpacing ipsColumns_collapsePhone   '>
+
+
+		 <!-- information of the user  -->
+			<aside class='ipsComment_author cAuthorPane ipsColumn ipsColumn_medium ipsResponsive_hidePhone'>
+				<h3 class='ipsType_sectionHead cAuthorPane_author ipsType_blendLinks ipsType_break'>
+					<span class='ipsResponsive_showPhone ipsResponsive_inline'>	
+						<a><i class='fa fa-circle'></i></a>
+					</span>
+				</h3>
+
+				<ul class='cAuthorPane_info ipsList_reset'>
+					
+						<a class="ipsUserPhoto ipsUserPhoto_small">
+				            <img src="{{ MEDIA_URL }}{% random_image %}">
+						</a>
+
+					{% if post.posted_by %}
+					<span>
+						<li>{{ comment.posted_by }}</li> 
+					</span>
+				    {% else %}
+						<li>{{ comment.posted_by_user }}</li>
+					{% endif %}
+					
+				</ul>
+			</aside>
+
+			<div class='ipsColumn ipsColumn_fluid'>
+				<div class="ipsComment_content ipsType_medium  ipsFaded_withHover">
+
+					<div class="ipsComment_meta ipsType_light">
+						<div class="ipsType_reset">
+							<a class="ipsType_blendLinks">Posted at <time>{{ comment.created_on }}</time>
+							</a>
+							<span class="ipsResponsive_hidePhone"></span>
+						</div>
+
+					</div>
+
+<!-- context of the comment -->
+					<div class="cPost_contentWrap ipsPad">
+				
+						<div data-role="commentContent" class="ipsType_normal ipsType_richText ipsContained" data-controller="core.front.core.lightboxedImages">
+							<p>{{ comment.message }}</p>
+						</div>
+
+					</div>
+<!-- end of the comment context -->
+				</div>
+			</div>
+
+		</article>		
+{% endfor %}
+
+{% endif %}
+<!--  end of comment -->
+
+		<div class="ipsGrid_span6 ipsType_left ipsPager_prev ipsPager_noDesc">
+			<a href="{% url 'forum' forum_slug=post.forum %}">
+				<span class="ipsPager_type" style = "text-align: center">Go Back</span>
+			</a>
+		</div>
+
+</div>
+		
+{% if post.closed %}
+
+<div data-role="replyArea" class="cTopicPostArea ipsAreaBackground ipsPad  ipsSpacer_top">
+							
+<form accept-charset="utf-8" class="ipsForm ipsForm_vertical" action="" method="post" enctype="multipart/form-data">
+
+	<div class="ipsComposeArea ipsComposeArea_withPhoto ipsClearfix ipsContained ipsComposeArea_minimized">
+
+		<div style="text-align: center;">
+			<h3>This topic has closed, you cannot reply.</h3>
+		</div>		
+	</div>
+
+</form>
+			
+</div>
+
+{% else %}
+<div data-role="replyArea" class="cTopicPostArea ipsAreaBackground ipsPad  ipsSpacer_top">
+						
+	{% if error %}
+       <div class="alert alert-info alert-dismissable">
+
+         <p> ERROR: </p>
+            <div class="alert alert-danger">
+                <strong>{{ error }}</strong>
+            </div>
+           
+       </div>
+    {% endif %}
+	
+<form accept-charset="utf-8" class="ipsForm ipsForm_vertical" action="" method="post" enctype="multipart/form-data">
+	{% csrf_token %}
+      <div class="col-12">
+          <div class="form-group">
+          	{{ comment_form.as_p }}
+          </div>
+          <button type="submit" class="button button-contactForm btn_1">Reply</button>
+        </div>
+</form>
+</div>
+
+{% endif %}
+</main>
+
+	</body>
+
+	{% endblock %}
+
+

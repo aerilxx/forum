@@ -1,0 +1,34 @@
+{% extends 'base.html' %} 
+
+{% load static %}
+
+{% block content %}
+
+{% if user.is_authenticated %}
+
+<div style="max-width: 600px; margin: auto;">
+    {% if error %}
+     <div class="alert alert-info alert-dismissable">
+        <p> Error: </p>
+           <div class="alert alert-danger">
+               <strong>{{ error }}</strong>
+           </div>
+     </div>
+    {% endif %}
+
+    <hr>
+    <div class="row">
+        <div class="text-center">
+           <h3>BYEBYE</h3>
+            <div style = "text-align: center;">
+            <a><img style = "height: 300px; width: 400px;" src ="{% static 'img/bye.gif' %}"></a>  
+          </div>
+          <p>Hate to see you go but we'll keep your posts! Don't worry, once you delete your account, the posts will be assinged another name.</p>
+        </div>
+    
+    <br>
+</div>
+
+{% endif %}
+
+{% endblock %}
